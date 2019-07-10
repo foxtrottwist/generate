@@ -11,6 +11,7 @@ import 'core-js'
 
 jasonSchemaFaker.extend('faker', () => faker)
 
+const [, , document] = process.argv
 const cwd = process.cwd()
 const fileName = 'fixture.json'
 const defaultTransformers = [company, email, id]
@@ -36,6 +37,6 @@ async function generateFixture(api: any, transformers = defaultTransformers) {
 }
 
 export default generateFixture
-export { email, requireAllProperties }
+export { company, email, id }
 
-generateFixture('swagger.yaml')
+generateFixture(document)
