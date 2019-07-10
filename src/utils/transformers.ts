@@ -1,21 +1,22 @@
 import get from 'lodash.get'
 
 export function requireAllProperties(definition: object): object {
-  // prettier-ignore
-  const properties = get(definition, 'properties', null) || get(definition, 'items.properties', null)
+  const properties = get(definition, 'properties', null)
 
   if (properties) {
-    const required = Object.keys(properties)
     const modifiedProperties = Object.entries(properties).map(
       ([key, value]: [string, any]) => {
-        if (value.type === 'array' || value.type === 'object') {
+        if (value.type === 'object') {
           return [key, requireAllProperties(value)]
+        } else if (value.type === 'array') {
+          return [key, { ...value, items: requireAllProperties(value.items) }]
         }
         return [key, value]
       },
     )
     // @ts-ignore ignoring Object.fromEntries provided by core-js
     const newPropertiesObject = Object.fromEntries(modifiedProperties)
+    const required = Object.keys(properties)
 
     return { ...definition, required, properties: newPropertiesObject }
   }
