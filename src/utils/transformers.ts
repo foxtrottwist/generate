@@ -14,7 +14,7 @@ export function requireAllProperties(definition: object): object {
         return [key, value]
       },
     )
-    // @ts-ignore ignoring Object.fromEntries provided by core-js
+    // @ts-ignore no type definitions for Object.fromEntries provided by core-js
     const newPropertiesObject = Object.fromEntries(modifiedProperties)
     const required = Object.keys(properties)
 
@@ -33,7 +33,7 @@ export function email(definition: object) {
     }
     return [key, value]
   })
-  // @ts-ignore ignoring Object.fromEntries provided by core-js
+  // @ts-ignore no type definitions for Object.fromEntries provided by core-js
   const propertiesObject = Object.fromEntries(modifiedProperties)
 
   return { ...definition, properties: propertiesObject }
@@ -56,7 +56,7 @@ export function fakeId(definition: object): object {
         return [key, value]
       },
     )
-    // @ts-ignore ignoring Object.fromEntries provided by core-js
+    // @ts-ignore no type definitions for Object.fromEntries provided by core-js
     const propertiesObject = Object.fromEntries(modifiedProperties)
 
     return { ...definition, properties: propertiesObject }
@@ -73,7 +73,7 @@ export function company(definition: object) {
     }
     return [key, value]
   })
-  // @ts-ignore ignoring Object.fromEntries provided by core-js
+  // @ts-ignore no type definitions for Object.fromEntries provided by core-js
   const propertiesObject = Object.fromEntries(modifiedProperties)
 
   return { ...definition, properties: propertiesObject }

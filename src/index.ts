@@ -34,7 +34,7 @@ async function generateFixture(api: any, transformers = defaultTransformers) {
     ([endpoint, definition]) => [endpoint, composedTransformers(definition)],
   )
 
-  // @ts-ignore ignoring Object.fromEntries provided by core-js
+  // @ts-ignore no type definitions for Object.fromEntries provided by core-js
   const definitionsObject = Object.fromEntries(modifiedDefinitions)
   const fixture = jasonSchemaFaker.generate(definitionsObject)
 
