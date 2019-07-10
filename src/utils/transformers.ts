@@ -39,19 +39,29 @@ export function email(definition: object) {
   return { ...definition, properties: propertiesObject }
 }
 
-export function id(definition: object) {
-  const properties = get(definition, 'properties', {})
+export function fakeId(definition: object): object {
+  const properties = get(definition, 'properties', false)
 
-  const modifiedProperties = Object.entries(properties).map(([key, value]) => {
-    if (key.includes('id')) {
-      return [key, { ...value, faker: 'random.uuid' }]
-    }
-    return [key, value]
-  })
-  // @ts-ignore ignoring Object.fromEntries provided by core-js
-  const propertiesObject = Object.fromEntries(modifiedProperties)
+  if (properties) {
+    const modifiedProperties = Object.entries(properties).map(
+      ([key, value]: [string, any]) => {
+        if (key.includes('id') || key.includes('Id')) {
+          return [key, { ...value, faker: 'random.uuid' }]
+        } else if (value.type === 'object') {
+          return [key, fakeId(value)]
+        } else if (value.type === 'array') {
+          return [key, { ...value, items: fakeId(value.items) }]
+        }
 
-  return { ...definition, properties: propertiesObject }
+        return [key, value]
+      },
+    )
+    // @ts-ignore ignoring Object.fromEntries provided by core-js
+    const propertiesObject = Object.fromEntries(modifiedProperties)
+
+    return { ...definition, properties: propertiesObject }
+  }
+  return definition
 }
 
 export function company(definition: object) {

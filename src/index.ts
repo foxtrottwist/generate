@@ -1,5 +1,10 @@
 import { compose } from './utils/helpers'
-import { requireAllProperties, email, company, id } from './utils/transformers'
+import {
+  requireAllProperties,
+  email,
+  company,
+  fakeId,
+} from './utils/transformers'
 import faker from 'faker'
 import fs from 'fs'
 import get from 'lodash.get'
@@ -14,7 +19,7 @@ jasonSchemaFaker.extend('faker', () => faker)
 const [, , document] = process.argv
 const cwd = process.cwd()
 const fileName = 'fixture.json'
-const defaultTransformers = [company, email, id]
+const defaultTransformers = [company, email, fakeId]
 
 async function generateFixture(api: any, transformers = defaultTransformers) {
   const OpenDocument = await SwaggerParser.dereference(api)
@@ -37,6 +42,6 @@ async function generateFixture(api: any, transformers = defaultTransformers) {
 }
 
 export default generateFixture
-export { company, email, id }
+export { company, email, fakeId }
 
 generateFixture(document)
