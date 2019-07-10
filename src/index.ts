@@ -1,3 +1,11 @@
+import faker from 'faker'
+import fs from 'fs'
+import get from 'lodash.get'
+// @ts-ignore no type definitions json-schema-faker
+import JSONSchemaFaker from 'json-schema-faker'
+import path from 'path'
+import SwaggerParser from 'swagger-parser'
+import 'core-js'
 import { compose } from './utils/helpers'
 import {
   requireAllProperties,
@@ -5,16 +13,8 @@ import {
   company,
   fakeId,
 } from './utils/transformers'
-import faker from 'faker'
-import fs from 'fs'
-import get from 'lodash.get'
-// @ts-ignore json-schema-faker
-import jasonSchemaFaker from 'json-schema-faker'
-import path from 'path'
-import SwaggerParser from 'swagger-parser'
-import 'core-js'
 
-jasonSchemaFaker.extend('faker', () => faker)
+JSONSchemaFaker.extend('faker', () => faker)
 
 const [, , document] = process.argv
 const cwd = process.cwd()
@@ -36,7 +36,7 @@ async function generateFixture(api: any, transformers = defaultTransformers) {
 
   // @ts-ignore no type definitions for Object.fromEntries provided by core-js
   const definitionsObject = Object.fromEntries(modifiedDefinitions)
-  const fixture = jasonSchemaFaker.generate(definitionsObject)
+  const fixture = JSONSchemaFaker.generate(definitionsObject)
 
   fs.writeFileSync(path.join(cwd, fileName), JSON.stringify(fixture))
 }
