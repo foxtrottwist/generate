@@ -1,7 +1,7 @@
 import get from 'lodash.get'
 
 export function requireAllProperties(definition: object): object {
-  const properties = get(definition, 'properties', null)
+  const properties = get(definition, 'properties', false)
 
   if (properties) {
     const modifiedProperties = Object.entries(properties).map(
