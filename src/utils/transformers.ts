@@ -33,19 +33,24 @@ export function requireAllProperties(definition: Definition): Definition {
   return definition
 }
 
-export function email(definition: object) {
-  const properties = get(definition, 'properties', {})
+export function email(definition: Definition): Definition {
+  const properties = get(definition, 'properties', false)
+  if (properties) {
+    const modifiedProperties = Object.entries(properties).map(
+      ([key, value]) => {
+        if (key.includes('email')) {
+          return [key, { ...value, faker: 'internet.email' }]
+        }
+        return [key, value]
+      },
+    )
+    // @ts-ignore no type definitions for Object.fromEntries provided by core-js
+    const propertiesObject = Object.fromEntries(modifiedProperties)
 
-  const modifiedProperties = Object.entries(properties).map(([key, value]) => {
-    if (key.includes('email')) {
-      return [key, { ...value, faker: 'internet.email' }]
-    }
-    return [key, value]
-  })
-  // @ts-ignore no type definitions for Object.fromEntries provided by core-js
-  const propertiesObject = Object.fromEntries(modifiedProperties)
+    return { ...definition, properties: propertiesObject }
+  }
 
-  return { ...definition, properties: propertiesObject }
+  return definition
 }
 
 export function fakeId(definition: Definition): Definition {
@@ -75,17 +80,22 @@ export function fakeId(definition: Definition): Definition {
   return definition
 }
 
-export function company(definition: object) {
-  const properties = get(definition, 'properties', {})
+export function company(definition: Definition): Definition {
+  const properties = get(definition, 'properties', false)
+  if (properties) {
+    const modifiedProperties = Object.entries(properties).map(
+      ([key, value]) => {
+        if (key.includes('companyName')) {
+          return [key, { ...value, faker: 'company.companyName' }]
+        }
+        return [key, value]
+      },
+    )
+    // @ts-ignore no type definitions for Object.fromEntries provided by core-js
+    const propertiesObject = Object.fromEntries(modifiedProperties)
 
-  const modifiedProperties = Object.entries(properties).map(([key, value]) => {
-    if (key.includes('companyName')) {
-      return [key, { ...value, faker: 'company.companyName' }]
-    }
-    return [key, value]
-  })
-  // @ts-ignore no type definitions for Object.fromEntries provided by core-js
-  const propertiesObject = Object.fromEntries(modifiedProperties)
+    return { ...definition, properties: propertiesObject }
+  }
 
-  return { ...definition, properties: propertiesObject }
+  return definition
 }
