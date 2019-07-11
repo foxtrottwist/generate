@@ -1,6 +1,13 @@
 import get from 'lodash.get'
 
-export function requireAllProperties(definition: object): object {
+type Definition = {
+  items?: any
+  properties?: object
+  required?: string[]
+  type?: string
+}
+
+export function requireAllProperties(definition: Definition): Definition {
   const properties = get(definition, 'properties', false)
 
   if (properties) {
@@ -19,6 +26,8 @@ export function requireAllProperties(definition: object): object {
     const required = Object.keys(properties)
 
     return { ...definition, required, properties: newPropertiesObject }
+  } else if (definition.type === 'array') {
+    return { ...definition, items: requireAllProperties(definition.items) }
   }
 
   return definition
@@ -39,7 +48,7 @@ export function email(definition: object) {
   return { ...definition, properties: propertiesObject }
 }
 
-export function fakeId(definition: object): object {
+export function fakeId(definition: Definition): Definition {
   const properties = get(definition, 'properties', false)
 
   if (properties) {
@@ -60,6 +69,8 @@ export function fakeId(definition: object): object {
     const propertiesObject = Object.fromEntries(modifiedProperties)
 
     return { ...definition, properties: propertiesObject }
+  } else if (definition.type === 'array') {
+    return { ...definition, items: fakeId(definition.items) }
   }
   return definition
 }
