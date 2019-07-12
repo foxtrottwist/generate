@@ -18,7 +18,7 @@ JSONSchemaFaker.extend('faker', () => faker)
 
 const [, , document, endpoint] = process.argv
 const cwd = process.cwd()
-const fileName = 'fixture.json'
+const fileName = endpoint.slice(0, 1).toLocaleLowerCase() + endpoint.slice(1)
 const defaultTransformers = [company, email, fakeId]
 
 async function generateFixture(
@@ -27,8 +27,7 @@ async function generateFixture(
   transformers = defaultTransformers,
 ) {
   const OpenDocument = await SwaggerParser.dereference(api)
-  const definitions = get(OpenDocument, 'definitions', {})
-  const definition = get(definitions, endpoint, {})
+  const definition = get(OpenDocument, `definitions.${endpoint}`, {})
 
   const composedTransformers = compose(
     requireAllProperties,
@@ -37,7 +36,7 @@ async function generateFixture(
 
   const modifiedDefinitions = composedTransformers(definition)
   const fixture = JSONSchemaFaker.generate(modifiedDefinitions)
-  fs.writeFileSync(path.join(cwd, fileName), JSON.stringify(fixture))
+  fs.writeFileSync(path.join(cwd, `${fileName}.json`), JSON.stringify(fixture))
 }
 
 generateFixture(document, endpoint)
