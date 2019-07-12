@@ -22,7 +22,7 @@ function customTransformer(apiDefinition) {
   // implement the thing
 }
 
-generate('schema.yaml', 'SomeEndpoint', fakeId, fakeEmail, customTransformer)
+generate('schema.yaml', 'SomeEndpoint', [fakeId, fakeEmail, customTransformer])
 ```
 
 One could even get fancy with their workflow:
