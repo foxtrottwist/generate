@@ -18,8 +18,8 @@ Via a custom script, to provide overrides for the default transformer methods th
 ```javascript
 import generate, { fakeId, fakeEmail } from 'generate-generate'
 
-function customTransformer(ApiDefinition) {
-  // implimentation the thing
+function customTransformer(apiDefinition) {
+  // implement the thing
 }
 
 generate('schema.yaml', 'SomeEndpoint', fakeId, fakeEmail, customTransformer)
