@@ -5,7 +5,7 @@ import get from 'lodash.get'
 import JSONSchemaFaker from 'json-schema-faker'
 import path from 'path'
 import SwaggerParser from 'swagger-parser'
-import 'core-js'
+import 'core-js/es/object/from-entries'
 import { compose } from './utils/helpers'
 import {
   requireAllProperties,
