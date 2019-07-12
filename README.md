@@ -7,8 +7,6 @@
 
 ## Proposed Usage
 
----
-
 Via command line as script:
 
 ```bash
