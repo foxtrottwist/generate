@@ -7,13 +7,13 @@
 
 ## Proposed Usage
 
-Via command line as script:
+Via command line:
 
 ```bash
 generate <schema> <endpoint>
 ```
 
-Via a custom script, to provide overrides for the default transformer methods that create a mock response fixture:
+Via a custom script, to provide overrides for the default transformer methods. Transformers operate on the schema to create a fixture:
 
 ```javascript
 import generate, { fakeId, fakeEmail } from 'generate'
@@ -38,7 +38,6 @@ endpoints.forEach(endpoint => generate('schema.yaml', endpoint))
 Or
 
 ```javascript
-const generate = require('generate')
 const { execSync } = require('child_process')
 
 const endpoints = ['SomeEndpoint', 'AnotherEndpoint', 'YetOneMoreEndpoint']
