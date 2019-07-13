@@ -6,20 +6,15 @@ import JSONSchemaFaker from 'json-schema-faker'
 import path from 'path'
 import SwaggerParser from 'swagger-parser'
 import 'core-js/es/object/from-entries'
-import { compose } from './utils/helpers'
-import {
-  requireAllProperties,
-  email,
-  company,
-  fakeId,
-} from './utils/transformers'
+import { compose, requireAllProperties } from './utils/helpers'
+import { fakeCompanyName, fakeEmail, fakeId } from './utils/transformers'
 
 JSONSchemaFaker.extend('faker', () => faker)
 
 const [, , document, endpoint] = process.argv
 const cwd = process.cwd()
 const fileName = endpoint.slice(0, 1).toLocaleLowerCase() + endpoint.slice(1)
-const defaultTransformers = [company, email, fakeId]
+const defaultTransformers = [fakeCompanyName, fakeEmail, fakeId]
 
 async function generateFixture(
   api: any,
@@ -42,4 +37,4 @@ async function generateFixture(
 generateFixture(document, endpoint)
 
 export default generateFixture
-export { company, email, fakeId }
+export { fakeCompanyName, fakeEmail, fakeId }
