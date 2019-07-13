@@ -20,7 +20,7 @@ const cwd = process.cwd()
 const fileName = endpoint.slice(0, 1).toLocaleLowerCase() + endpoint.slice(1)
 const defaultTransformers = [fakeCompanyName, fakeEmail, fakeId]
 
-async function generateFixture(
+async function generate(
   api: any,
   endpoint: string,
   transformers = defaultTransformers,
@@ -37,7 +37,7 @@ async function generateFixture(
   fs.writeFileSync(path.join(cwd, `${fileName}.json`), JSON.stringify(fixture))
 }
 
-generateFixture(document, endpoint)
+generate(document, endpoint)
 
-export default generateFixture
+export default generate
 export { fakeCompanyName, fakeEmail, fakeId, traverseProperties }
