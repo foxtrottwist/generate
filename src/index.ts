@@ -6,7 +6,11 @@ import JSONSchemaFaker from 'json-schema-faker'
 import path from 'path'
 import SwaggerParser from 'swagger-parser'
 import 'core-js/es/object/from-entries'
-import { compose, requireAllProperties } from './utils/helpers'
+import {
+  compose,
+  requireAllProperties,
+  traverseProperties,
+} from './utils/helpers'
 import { fakeCompanyName, fakeEmail, fakeId } from './utils/transformers'
 
 JSONSchemaFaker.extend('faker', () => faker)
@@ -36,4 +40,4 @@ async function generateFixture(
 generateFixture(document, endpoint)
 
 export default generateFixture
-export { fakeCompanyName, fakeEmail, fakeId }
+export { fakeCompanyName, fakeEmail, fakeId, traverseProperties }
