@@ -21,16 +21,15 @@ async function generateFixture(
   endpoint: string,
   transformers = defaultTransformers,
 ) {
-  const OpenDocument = await SwaggerParser.dereference(api)
-  const definition = get(OpenDocument, `definitions.${endpoint}`, {})
-
   const composedTransformers = compose(
     requireAllProperties,
     ...transformers,
   )
 
-  const modifiedDefinitions = composedTransformers(definition)
-  const fixture = JSONSchemaFaker.generate(modifiedDefinitions)
+  const OpenDocument = await SwaggerParser.dereference(api)
+  const definition = get(OpenDocument, `definitions.${endpoint}`, {})
+  const modifiedDefinition = composedTransformers(definition)
+  const fixture = JSONSchemaFaker.generate(modifiedDefinition)
   fs.writeFileSync(path.join(cwd, `${fileName}.json`), JSON.stringify(fixture))
 }
 

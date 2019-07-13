@@ -19,11 +19,13 @@ export function requireAllProperties(definition: Definition): Definition {
         return [key, requireAllProperties(value)]
       },
     )
-    // @ts-ignore no type definitions for Object.fromEntries provided by core-js
-    const newPropertiesObject = Object.fromEntries(modifiedProperties)
-    const required = Object.keys(properties)
 
-    return { ...definition, required, properties: newPropertiesObject }
+    return {
+      ...definition,
+      required: Object.keys(properties),
+      // @ts-ignore no type definitions
+      properties: Object.fromEntries(modifiedProperties),
+    }
   } else if (definition.type === 'array') {
     return { ...definition, items: requireAllProperties(definition.items) }
   }
@@ -52,8 +54,7 @@ export function traverseProperties(
       },
     )
     // @ts-ignore Object.fromEntries no type definitions
-    const modifiedPropertiesObject = Object.fromEntries(modifiedProperties)
-    return { ...definition, properties: modifiedPropertiesObject }
+    return { ...definition, properties: Object.fromEntries(modifiedProperties) }
   } else if (definition.type === 'array') {
     return { ...definition, items: modifier(definition.items) }
   }
