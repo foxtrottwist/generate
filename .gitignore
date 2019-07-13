@@ -25,5 +25,5 @@ yarn-error.log*
 
 # project 
 swagger*.*
-fixture*.json
+fixtures
 

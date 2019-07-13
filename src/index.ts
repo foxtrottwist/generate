@@ -15,7 +15,7 @@ import { fakeCompanyName, fakeEmail, fakeId } from './utils/transformers'
 
 JSONSchemaFaker.extend('faker', () => faker)
 
-const [, , document, endpoint] = process.argv
+const [, , document, endpoint, dir = 'fixtures'] = process.argv
 const cwd = process.cwd()
 const fileName = endpoint.slice(0, 1).toLocaleLowerCase() + endpoint.slice(1)
 const defaultTransformers = [fakeCompanyName, fakeEmail, fakeId]
@@ -34,7 +34,13 @@ async function generate(
   const definition = get(OpenDocument, `definitions.${endpoint}`, {})
   const modifiedDefinition = composedTransformers(definition)
   const fixture = JSONSchemaFaker.generate(modifiedDefinition)
-  fs.writeFileSync(path.join(cwd, `${fileName}.json`), JSON.stringify(fixture))
+
+  !fs.existsSync(dir) ? fs.mkdirSync('fixtures') : undefined
+
+  fs.writeFileSync(
+    path.join(cwd, `${dir}/${fileName}.json`),
+    JSON.stringify(fixture),
+  )
 }
 
 generate(document, endpoint)
