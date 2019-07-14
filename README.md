@@ -13,14 +13,15 @@ Via command line:
 generate <schema> <endpoint>
 ```
 
-Via a custom script, to provide overrides for the default transformer methods. Transformers operate on the schema to create a fixture:
+Via a custom script, to provide overrides for the default transformer methods. Transformers operate on the schema to help create a fixture:
 
 ```javascript
-import generate, { fakeId, fakeEmail } from 'generate'
+import generate, { fakeId, fakeEmail, transformer } from 'generate'
 
-function customTransformer(apiDefinition) {
-  // implement the thing
-}
+const customTransformer = transformer(
+  property => property.includes('tartus'), // what property do you want to mock
+  () => 'faker.method', // what faker method do you want to call
+)
 
 generate('schema.yaml', 'SomeEndpoint', [fakeId, fakeEmail, customTransformer])
 ```
