@@ -1,16 +1,16 @@
 import { transformer } from './helpers'
 
 export const fakeCompanyName = transformer(
-  (key: string) => key.includes('companyName'),
-  'company.companyName',
+  (property: string) => property.includes('companyName'),
+  () => 'company.companyName',
 )
 
 export const fakeEmail = transformer(
-  (key: string) => key.includes('email'),
-  'internet.email',
+  (property: string) => property.includes('email'),
+  () => 'internet.email',
 )
 
 export const fakeId = transformer(
-  (key: string) => key.includes('id') || key.includes('Id'),
-  'random.uuid',
+  (property: string) => property.includes('id') || property.includes('Id'),
+  () => 'random.uuid',
 )
