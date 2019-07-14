@@ -35,8 +35,8 @@ export function requireAllProperties(definition: Definition): Definition {
 
 export function traverseProperties(
   definition: Definition,
-  tester: (key: string) => boolean,
-  targetMock: string,
+  tester: (property: string) => boolean,
+  mock: (property?: string) => string,
   modifier: (definition: Definition) => Definition,
 ): Definition {
   const properties = get(definition, 'properties', false)
@@ -47,7 +47,7 @@ export function traverseProperties(
         if (value.type === 'array') {
           return [key, { ...value, items: modifier(value.items) }]
         } else if (tester(key)) {
-          return [key, { ...value, faker: targetMock }]
+          return [key, { ...value, faker: mock(key) }]
         }
 
         return [key, modifier(value)]
@@ -62,7 +62,10 @@ export function traverseProperties(
   return definition
 }
 
-export function transformer(tester: (prop: string) => boolean, mock: string) {
+export function transformer(
+  tester: (property: string) => boolean,
+  mock: (property?: string) => string,
+) {
   return function fn(definition: Definition): Definition {
     return traverseProperties(definition, tester, mock, fn)
   }
