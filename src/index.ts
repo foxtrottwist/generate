@@ -6,11 +6,7 @@ import JSONSchemaFaker from 'json-schema-faker'
 import path from 'path'
 import SwaggerParser from 'swagger-parser'
 import 'core-js/es/object/from-entries'
-import {
-  compose,
-  requireAllProperties,
-  traverseProperties,
-} from './utils/helpers'
+import { compose, requireAllProperties, transformer } from './utils/helpers'
 import { fakeCompanyName, fakeEmail, fakeId } from './utils/transformers'
 
 JSONSchemaFaker.extend('faker', () => faker)
@@ -46,4 +42,4 @@ async function generate(
 generate(document, endpoint)
 
 export default generate
-export { fakeCompanyName, fakeEmail, fakeId, traverseProperties }
+export { fakeCompanyName, fakeEmail, fakeId, transformer }

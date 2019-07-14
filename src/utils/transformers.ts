@@ -1,29 +1,16 @@
-import { traverseProperties } from './helpers'
-import { Definition } from './helpers'
+import { transformer } from './helpers'
 
-export function fakeEmail(definition: Definition): Definition {
-  return traverseProperties(
-    definition,
-    'internet.email',
-    (key: string) => key.includes('email'),
-    fakeEmail,
-  )
-}
+export const fakeCompanyName = transformer(
+  (key: string) => key.includes('companyName'),
+  'company.companyName',
+)
 
-export function fakeId(definition: Definition): Definition {
-  return traverseProperties(
-    definition,
-    'random.uuid',
-    (key: string) => key.includes('id') || key.includes('Id'),
-    fakeId,
-  )
-}
+export const fakeEmail = transformer(
+  (key: string) => key.includes('email'),
+  'internet.email',
+)
 
-export function fakeCompanyName(definition: Definition): Definition {
-  return traverseProperties(
-    definition,
-    'company.companyName',
-    (key: string) => key.includes('companyName'),
-    fakeCompanyName,
-  )
-}
+export const fakeId = transformer(
+  (key: string) => key.includes('id') || key.includes('Id'),
+  'random.uuid',
+)

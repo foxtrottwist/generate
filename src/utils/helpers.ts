@@ -35,9 +35,9 @@ export function requireAllProperties(definition: Definition): Definition {
 
 export function traverseProperties(
   definition: Definition,
-  targetMock: string,
   tester: (key: string) => boolean,
-  modifier: (o: object) => object,
+  targetMock: string,
+  modifier: (definition: Definition) => Definition,
 ): Definition {
   const properties = get(definition, 'properties', false)
 
@@ -60,6 +60,12 @@ export function traverseProperties(
   }
 
   return definition
+}
+
+export function transformer(tester: (prop: string) => boolean, mock: string) {
+  return function fn(definition: Definition): Definition {
+    return traverseProperties(definition, tester, mock, fn)
+  }
 }
 
 // prettier-ignore
