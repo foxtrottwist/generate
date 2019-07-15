@@ -5,6 +5,11 @@ export const fakeCompanyName = transformer(
   () => 'company.companyName',
 );
 
+export const fakeDomain = transformer(
+  (property) => property.includes('domain') || property.includes('Domain'),
+  () => 'internet.domainName',
+);
+
 export const fakeEmail = transformer(
   (property) => property.includes('email'),
   () => 'internet.email',
