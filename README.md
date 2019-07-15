@@ -1,5 +1,5 @@
 <div align="center">
-<img src="https://gist.github.com/foxtrottwist/871dfbb97babda874dab4f22bafce0e1/raw/bba4f0d3628365706515555d9f93a3c158de93d7/doctor_who_dalek_by_konpatchi-d873tm6.png" alt="emotion" height="175" width="125">
+<img src="https://gist.github.com/foxtrottwist/871dfbb97babda874dab4f22bafce0e1/raw/bba4f0d3628365706515555d9f93a3c158de93d7/doctor_who_dalek_by_konpatchi-d873tm6.png" alt="dalek" height="175" width="125">
 <h1>generate</h1>
 <p>Generate test fixtures from a swagger/OpenAPI schema</p>
 </div>
