@@ -7,14 +7,19 @@ import path from 'path'
 import SwaggerParser from 'swagger-parser'
 import 'core-js/es/object/from-entries'
 import { compose, requireAllProperties, transformer } from './utils/helpers'
-import { fakeCompanyName, fakeEmail, fakeId } from './utils/transformers'
+import {
+  fakeCompanyName,
+  fakeEmail,
+  fakeId,
+  fakeName,
+} from './utils/transformers'
 
 JSONSchemaFaker.extend('faker', () => faker)
 
 const [, , document, endpoint, dir = 'fixtures'] = process.argv
 const cwd = process.cwd()
 const fileName = endpoint.slice(0, 1).toLocaleLowerCase() + endpoint.slice(1)
-const defaultTransformers = [fakeCompanyName, fakeEmail, fakeId]
+const defaultTransformers = [fakeCompanyName, fakeEmail, fakeId, fakeName]
 
 async function generate(
   api: any,

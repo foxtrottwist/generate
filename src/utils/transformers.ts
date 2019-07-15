@@ -14,3 +14,8 @@ export const fakeId = transformer(
   (property: string) => property.includes('id') || property.includes('Id'),
   () => 'random.uuid',
 )
+
+export const fakeName = transformer(
+  property => property.includes('firstName') || property.includes('lastName'),
+  property => `name.${property}`,
+)
