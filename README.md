@@ -19,8 +19,8 @@ Via a custom script, to provide overrides for the default transformer methods. T
 import generate, { fakeId, fakeEmail, transformer } from 'generate'
 
 const customTransformer = transformer(
-  property => property.includes('tartus'), // what property do you want to mock
-  () => 'faker.method', // what faker method do you want to call
+  property => property.includes('tardis'), // the property you want to mock
+  () => 'faker.method', // the faker method you want to call
 )
 
 generate('schema.yaml', 'SomeEndpoint', [fakeId, fakeEmail, customTransformer])
