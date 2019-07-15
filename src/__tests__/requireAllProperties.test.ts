@@ -1,4 +1,4 @@
-import { requireAllProperties } from '../utils/helpers'
+import { requireAllProperties } from '../utils/helpers';
 
 describe('requireAllProperties', () => {
   const schema = {
@@ -19,7 +19,7 @@ describe('requireAllProperties', () => {
         },
       },
     },
-  }
+  };
 
   const schemaWithReqiuiredProperties = {
     type: 'object',
@@ -41,9 +41,9 @@ describe('requireAllProperties', () => {
       },
     },
     required: ['user'],
-  }
+  };
 
   it('should return a schema with all properties required', () => {
-    expect(requireAllProperties(schema)).toEqual(schemaWithReqiuiredProperties)
-  })
-})
+    expect(requireAllProperties(schema)).toEqual(schemaWithReqiuiredProperties);
+  });
+});
