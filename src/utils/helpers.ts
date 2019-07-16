@@ -1,10 +1,10 @@
 import get from 'lodash.get';
 
 export type Definition = {
-  items?: any;
-  properties?: object;
-  required?: string[];
-  type?: string;
+  items: any;
+  properties: object;
+  required: string[];
+  type: string;
 };
 
 /**
