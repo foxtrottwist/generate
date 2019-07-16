@@ -34,7 +34,7 @@ export function requireAllProperties(definition: Definition): Definition {
 export function traverseProperties(
   definition: Definition,
   tester: (property: string) => boolean,
-  mock: (property?: string) => string,
+  mock: (property: string) => string,
   modifier: (definition: Definition) => Definition,
 ): Definition {
   const properties = get(definition, 'properties', false);
@@ -60,7 +60,7 @@ export function traverseProperties(
 
 export function transformer(
   tester: (property: string) => boolean,
-  mock: (property?: string) => string,
+  mock: (property: string) => string,
 ) {
   return function fn(definition: Definition): Definition {
     return traverseProperties(definition, tester, mock, fn);
