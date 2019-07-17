@@ -5,7 +5,7 @@
 </div>
 <hr />
 
-## Proposed Usage
+## Usage
 
 Via command line:
 
@@ -16,34 +16,32 @@ generate <schema> <endpoint>
 Via a custom script, to provide overrides for the default transformer methods. Transformers operate on the schema to help create a fixture:
 
 ```javascript
-import generate, { fakeId, fakeEmail, transformer } from 'generate'
+import generate, { fakeId, fakeEmail, transformer } from 'generate';
 
 const customTransformer = transformer(
-  property => property.includes('tardis'), // the property you want to mock
+  (property) => property.includes('tardis'), // the property you want to mock
   () => 'faker.method', // the faker method you want to call
-)
+);
 
-generate('schema.yaml', 'SomeEndpoint', [fakeId, fakeEmail, customTransformer])
+generate('schema.yaml', 'SomeEndpoint', [fakeId, fakeEmail, customTransformer]);
 ```
 
 One could even get fancy with their workflow:
 
 ```javascript
-import generate from 'generate'
+import generate from 'generate';
 
-const endpoints = ['SomeEndpoint', 'AnotherEndpoint', 'YetOneMoreEndpoint']
+const endpoints = ['SomeEndpoint', 'AnotherEndpoint', 'YetOneMoreEndpoint'];
 
-endpoints.forEach(endpoint => generate('schema.yaml', endpoint))
+endpoints.forEach((endpoint) => generate('schema.yaml', endpoint));
 ```
 
 Or
 
 ```javascript
-const { execSync } = require('child_process')
+const { execSync } = require('child_process');
 
-const endpoints = ['SomeEndpoint', 'AnotherEndpoint', 'YetOneMoreEndpoint']
+const endpoints = ['SomeEndpoint', 'AnotherEndpoint', 'YetOneMoreEndpoint'];
 
-endpoints.forEach(endpoint =>
-  execSync(`generate schema.yaml ${endpoint}`, { stdio: 'inherit' }),
-)
+endpoints.forEach((endpoint) => execSync(`generate schema.yaml ${endpoint}`, { stdio: 'inherit' }));
 ```
