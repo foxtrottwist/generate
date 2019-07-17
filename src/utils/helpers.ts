@@ -9,7 +9,7 @@ export type Definition = {
 
 /**
  * Helper function that requires all the properties in a schema definition
- * @param {Definition} definition - The schema definition to operate on
+ * @param definition - The schema definition to operate on
  * @returns {Definiton} - The schema definition with all propeties required
  */
 export function requireAllProperties(definition: Definition): Definition {
@@ -38,7 +38,7 @@ export function requireAllProperties(definition: Definition): Definition {
 
 /**
  * Helper function to traverse a schema definition
- * @param {Definition} definition - The given schema definition
+ * @param definition - The given schema definition
  * @param tester - The callback that will check if the property name is the property you wish to provide a mock
  * @param mock  - The callback that will set the faker method you wish to use, after the property has been found by the tester callback
  * @param modifier - The callback that will be called recursively to traverse the definition object
