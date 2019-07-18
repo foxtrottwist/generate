@@ -13,18 +13,24 @@ Via command line:
 generate <schema> <endpoint>
 ```
 
-Via a custom script, to provide overrides for the default transformer methods. Transformers operate on the schema to help create a fixture:
+Via a custom script, to provide overrides for the default transformer functions:
 
 ```javascript
 import generate, { fakeId, fakeEmail, transformer } from 'generate';
 
 const customTransformer = transformer(
-  (property) => property.includes('tardis'), // the property you want to mock
-  () => 'faker.method', // the faker method you want to call
+  (prop) => prop.includes('tardis'), // the property you want to mock
+  () => 'faker.method', // the faker method you want to set
 );
 
-generate('schema.yaml', 'SomeEndpoint', [fakeId, fakeEmail, customTransformer]);
+generate('schema.yaml', 'SomeEndpoint', [fakeId, fakeEmail, customTransformer]); // pass the custom transformer along with the defaults you want as an array
 ```
+
+Transformers operate on a schema to help create a fixture.
+The default transformers can be imported, along with a helper function called `transformer`, to aid in the creation of custom
+transformers. It takes two callbacks. The first checks if the property is the one you wish to mock, the second sets the faker method that generates
+the mock data. The second callback also accepts an optional props argument, allowing you to do additional logic before setting a faker method.
+A list of available methods can be found [here](https://github.com/Marak/Faker.js)
 
 One could even get fancy with their workflow:
 
