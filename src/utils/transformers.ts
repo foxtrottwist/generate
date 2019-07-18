@@ -1,5 +1,11 @@
 import { transformer } from './helpers';
 
+export const fakeAppName = transformer(
+  (property) =>
+    property === 'app' || property === 'appLabel' || property === 'appName' || property === 'name',
+  () => 'commerce.product',
+);
+
 export const fakeCompanyName = transformer(
   (property) => property.includes('companyName'),
   () => 'company.companyName',

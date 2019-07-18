@@ -7,14 +7,21 @@ import path from 'path';
 import SwaggerParser from 'swagger-parser';
 import 'core-js/es/object/from-entries';
 import { compose, requireAllProperties, transformer } from './utils/helpers';
-import { fakeCompanyName, fakeDomain, fakeEmail, fakeId, fakeName } from './utils/transformers';
+import {
+  fakeAppName,
+  fakeCompanyName,
+  fakeDomain,
+  fakeEmail,
+  fakeId,
+  fakeName,
+} from './utils/transformers';
 
 JSONSchemaFaker.extend('faker', () => faker);
 
 const [, , document, endpoint, dir = 'fixtures'] = process.argv;
 const cwd = process.cwd();
 const fileName = endpoint.slice(0, 1).toLocaleLowerCase() + endpoint.slice(1);
-const defaultTransformers = [fakeCompanyName, fakeDomain, fakeEmail, fakeId, fakeName];
+const defaultTransformers = [fakeAppName, fakeCompanyName, fakeDomain, fakeEmail, fakeId, fakeName];
 
 async function generate(api: any, endpoint: string, transformers = defaultTransformers) {
   const composedTransformers = compose(
@@ -35,4 +42,4 @@ async function generate(api: any, endpoint: string, transformers = defaultTransf
 generate(document, endpoint);
 
 export default generate;
-export { fakeCompanyName, fakeDomain, fakeEmail, fakeId, fakeName, transformer };
+export { fakeAppName, fakeCompanyName, fakeDomain, fakeEmail, fakeId, fakeName, transformer };
