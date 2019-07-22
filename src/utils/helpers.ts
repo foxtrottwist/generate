@@ -44,7 +44,7 @@ export function requireAllProperties(definition: Definition): Definition {
  * @param modifier - The callback that will be called recursively to traverse the definition object
  * @returns {Definition} - The modified schema definition
  */
-export function traverseProperties(
+export function traverseDefinition(
   definition: Definition,
   tester: (property: string) => boolean,
   mock: (property: string) => string,
@@ -82,7 +82,7 @@ export function transformer(
   mock: (property: string) => string,
 ) {
   return function fn(definition: Definition): Definition {
-    return traverseProperties(definition, tester, mock, fn);
+    return traverseDefinition(definition, tester, mock, fn);
   };
 }
 

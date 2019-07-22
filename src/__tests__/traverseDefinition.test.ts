@@ -1,4 +1,4 @@
-import { Definition, traverseProperties } from '../utils/helpers';
+import { Definition, traverseDefinition } from '../utils/helpers';
 
 describe('traversProperties', () => {
   it('sets faker method correctly; simple case', () => {
