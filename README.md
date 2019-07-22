@@ -26,7 +26,7 @@ const customTransformer = createTransformer(
 generate('schema.yaml', 'SomeEndpoint', [fakeId, fakeEmail, customTransformer]); // pass the custom transformer along with the defaults you want as an array
 ```
 
-Transformers operate on a schema to help create a fixture. The default transformers can be imported for reuse when overriding or adding a custom transformer. A helper function called `createTransformer` is provided to aid in the creation of custom transformers. It takes two callbacks. The first, is predicate that checks if the property is the one you wish to mock. The second, sets the faker method that generates the mock data. The second callback also accepts an optional props argument, allowing you to do additional logic before setting a faker method. A list of available methods can be found [here](https://github.com/Marak/Faker.js).
+Transformers operate on a schema to help create a fixture. The default transformers can be imported for reuse when overriding or adding a custom transformer. A helper function called `createTransformer` is provided to aid in the creation of custom transformers. It takes two callbacks. The first, a predicate that checks if the property is the one you wish to mock. The second, sets the faker method that generates the mock data. The second callback also accepts an optional props argument, allowing you to do additional logic before setting a faker method. A list of available methods can be found [here](https://github.com/Marak/Faker.js).
 
 One could even get fancy with their workflow:
 
