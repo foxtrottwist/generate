@@ -29,7 +29,9 @@ export function requireAllProperties(definition: Definition): Definition {
       // @ts-ignore: Object.fromEntries no type definitions
       properties: Object.fromEntries(modifiedProperties),
     };
-  } else if (definition.type === 'array') {
+  }
+
+  if (definition.type === 'array') {
     return { ...definition, items: requireAllProperties(definition.items) };
   }
 
@@ -56,7 +58,9 @@ export function traverseDefinition(
     const modifiedProperties = Object.entries(properties).map(([key, value]: [string, any]) => {
       if (value.type === 'array') {
         return [key, { ...value, items: modifier(value.items) }];
-      } else if (tester(key)) {
+      }
+
+      if (tester(key)) {
         return [key, { ...value, faker: mock(key) }];
       }
 
@@ -64,7 +68,9 @@ export function traverseDefinition(
     });
     // @ts-ignore: Object.fromEntries no type definitions
     return { ...definition, properties: Object.fromEntries(modifiedProperties) };
-  } else if (definition.type === 'array') {
+  }
+
+  if (definition.type === 'array') {
     return { ...definition, items: modifier(definition.items) };
   }
 
