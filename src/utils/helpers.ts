@@ -77,7 +77,7 @@ export function traverseDefinition(
  * @param mock  - The callback that will set the faker method you wish to use, after the property has been found by the tester callback
  * @returns {Function} - The function that will be called to operate on a schema definition
  */
-export function transformer(
+export function createTransformer(
   tester: (property: string) => boolean,
   mock: (property: string) => string,
 ) {

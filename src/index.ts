@@ -6,7 +6,7 @@ import JSONSchemaFaker from 'json-schema-faker';
 import path from 'path';
 import SwaggerParser from 'swagger-parser';
 import 'core-js/es/object/from-entries';
-import { compose, requireAllProperties, transformer } from './utils/helpers';
+import { compose, requireAllProperties, createTransformer } from './utils/helpers';
 import {
   fakeAppName,
   fakeCompanyName,
@@ -42,4 +42,4 @@ async function generate(api: any, endpoint: string, transformers = defaultTransf
 generate(document, endpoint);
 
 export default generate;
-export { fakeAppName, fakeCompanyName, fakeDomain, fakeEmail, fakeId, fakeName, transformer };
+export { fakeAppName, fakeCompanyName, fakeDomain, fakeEmail, fakeId, fakeName, createTransformer };
