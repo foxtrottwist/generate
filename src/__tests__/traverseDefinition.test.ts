@@ -1,6 +1,6 @@
 import { Definition, traverseDefinition } from '../utils/helpers';
 
-describe('traversProperties', () => {
+describe('traverseDefinition', () => {
   it('sets faker method correctly; simple case', () => {
     const schema = {
       type: 'object',
@@ -60,7 +60,7 @@ describe('traversProperties', () => {
     };
 
     function recurrsivelyCalledWrappingFunction(definition: Definition) {
-      return traverseProperties(
+      return traverseDefinition(
         definition,
         (prop) => prop.includes('email'),
         () => 'internet.email',
@@ -125,7 +125,7 @@ describe('traversProperties', () => {
     };
 
     function recurrsivelyCalledWrappingFunction(definition: Definition) {
-      return traverseProperties(
+      return traverseDefinition(
         definition,
         (prop) => prop.includes(propName1) || prop.includes(propName2),
         (prop) => (prop.includes(propName1) ? mockMethod1 : mockMethod2),
